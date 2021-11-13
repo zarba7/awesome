@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"internal/app/domain_role/aggregate"
+	"awesome/internal/app/domain_role/aggregate"
 )
 
 type CreateRole struct {

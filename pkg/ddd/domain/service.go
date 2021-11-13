@@ -2,9 +2,9 @@ package domain
 
 import (
 	"ddd/adaptor"
-	"ddd/internal/dto"
-	"ddd/internal/po"
-	"ddd/internal/util"
+	dto2 "ddd/dto"
+	"ddd/po"
+	"ddd/util"
 	"fmt"
 	"log"
 	"reflect"
@@ -33,7 +33,7 @@ type service struct {
 	ftySession func(adaptor.DomainAggregate) Session
 	ftyCommand util.SameNameStructFactory
 	ftyEvent   util.SameNameStructFactory
-	outBox adaptor.DomainOutBox
+	outBox     adaptor.DomainOutBox
 	input  Input
 }
 
@@ -47,7 +47,7 @@ func (srv *service) run() error {
 	return srv.input.Start(srv.command)
 }
 
-func (srv *service) command(msg *dto.Message) (err error) {
+func (srv *service) command(msg *dto2.Message) (err error) {
 	agg, ok := srv.cache.Find(msg.AggID)
 	if !ok {
 		agg.srv = srv
@@ -67,7 +67,7 @@ func (srv *service) command(msg *dto.Message) (err error) {
 		return
 	}
 
-	var evts []*dto.Event
+	var evts []*dto2.Event
 
 	for _, evt := range agg.events {
 		applier := srv.ftyEvent.FindStructByFieldVal(evt.tid, evt.args)
@@ -85,7 +85,7 @@ func (srv *service) command(msg *dto.Message) (err error) {
 
 		agg.po.Events = append(agg.po.Events, poEvt)
 
-		evts = append(evts, &dto.Event{
+		evts = append(evts, &dto2.Event{
 			Uid:       poEvt.Uid,
 			TrxID:     poEvt.TrxID,
 			CreatedAt: poEvt.CreatedAt,

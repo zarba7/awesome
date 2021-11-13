@@ -3,8 +3,8 @@ package infrastructure
 import (
 	"bytes"
 	"context"
-	"ddd/internal/dto"
-	"ddd/internal/util/mutex"
+	"ddd/dto"
+	"ddd/util/mutex"
 	"errors"
 	nr "github.com/dapr/components-contrib/nameresolution"
 	"github.com/dapr/go-sdk/service/common"

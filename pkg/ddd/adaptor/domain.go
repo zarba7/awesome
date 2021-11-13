@@ -1,8 +1,8 @@
 package adaptor
 
 import (
-	"ddd/internal/dto"
-	"ddd/internal/po"
+	"ddd/dto"
+	"ddd/po"
 )
 
 type DomainOutBox interface {

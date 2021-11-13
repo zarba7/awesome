@@ -4,8 +4,8 @@ import (
 	"ddd/domain"
 	"ddd/infrastructure"
 	"ddd/infrastructure/persistence"
-	"internal/app/domain_role/aggregate"
-	"internal/app/domain_role"
+	"awesome/internal/app/domain_role/aggregate"
+	"awesome/internal/app/domain_role"
 	"log"
 )
 

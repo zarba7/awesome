@@ -1,9 +1,9 @@
 package domain_role
 
 import (
-	"internal/app/domain_role/aggregate"
-	"internal/app/domain_role/events"
-	"ddd/internal/util"
+	"awesome/internal/app/domain_role/aggregate"
+	"awesome/internal/app/domain_role/events"
+	"ddd/util"
 )
 
 func CommandFactory()  (factory util.SameNameStructFactory){

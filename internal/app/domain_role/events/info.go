@@ -1,7 +1,7 @@
 package events
 
 import (
-	"internal/app/domain_role/aggregate"
+	"awesome/internal/app/domain_role/aggregate"
 	"pbRole"
 )
 

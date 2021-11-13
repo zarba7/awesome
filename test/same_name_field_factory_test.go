@@ -1,8 +1,9 @@
-package util
+package test
 
 import (
+	"ddd/util"
 	"encoding/json"
-	"pbRole"
+	"awesome/internal/proto/pbRole"
 	"reflect"
 	"testing"
 )
@@ -24,7 +25,7 @@ type Set interface {
 	Set()
 }
 
-func Import(dispatcher *SameNameStructFactory) {
+func Import(dispatcher *util.SameNameStructFactory) {
 	table := map[int32]interface{}{
 		2: DomainEventSetName{},
 		3: &DomainEventAddItem{},
@@ -34,7 +35,7 @@ func Import(dispatcher *SameNameStructFactory) {
 	}
 }
 
-var dispatcher = SameNameStructFactory{}
+var dispatcher = util.SameNameStructFactory{}
 
 func init() {
 	Import(&dispatcher)

@@ -35,7 +35,7 @@ func (msg *Message) ResponseMarshal(buf *bytes.Buffer) error {
 	return write(buf, msg.TrxID, msg.AggID, msg.Tid, msg.Code)
 }
 func (msg *Message) ResponseUnmarshal(data []byte) error {
-	hl := len(data)-messageHeaderLen
+	hl := len(data)- messageHeaderLen
 	if err := read(data[hl:], &msg.TrxID, &msg.AggID, &msg.Tid, &msg.Code); err != nil{
 		return err
 	}
@@ -49,7 +49,7 @@ func (msg *Message) RequestMarshal(buf *bytes.Buffer) error {
 	return write(buf, msg.TrxID, msg.AggID, msg.Tid)
 }
 func (msg *Message) RequestUnmarshal(data []byte) error {
-	hl := len(data)-messageHeaderLen2
+	hl := len(data)- messageHeaderLen2
 	msg.Content = data[:hl]
 	return read(data[hl:], &msg.TrxID, &msg.AggID, &msg.Tid)
 }

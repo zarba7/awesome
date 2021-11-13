@@ -2,8 +2,8 @@ package domain
 
 import (
 	"ddd/adaptor"
-	"ddd/internal/dto"
-	"ddd/internal/util"
+	"ddd/dto"
+	"ddd/util"
 )
 
 type Codec interface {

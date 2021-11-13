@@ -1,6 +1,8 @@
 package domain
 
-import "ddd/internal/po"
+import (
+	"ddd/po"
+)
 
 type aggregate struct {
 	po  po.DomainAggregate
