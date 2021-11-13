@@ -1,0 +1,37 @@
+package domain
+
+import (
+	"base/goes"
+	"github.com/zarba7/ddd/internal/po"
+	"sync"
+)
+
+type taskEvent struct {
+	*po.DomainEvent
+	o *OutBox
+}
+
+func (t *taskEvent) Do() {
+	defer t.o.recycle(t)
+}
+
+type OutBox struct {
+	pool sync.Pool
+	goes.Core
+}
+
+func (o *OutBox) start() {
+	o.pool.New = func() interface{} { return &taskEvent{o: o} }
+	o.Go(o, 32)
+}
+func (o *OutBox) OnBlock() {}
+func (o *OutBox) OnClose() {}
+func (o *OutBox) send(event *po.DomainEvent) {
+	t := o.pool.Get().(*taskEvent)
+	t.DomainEvent = event
+	o.DoTask(t)
+}
+func (o *OutBox) recycle(t *taskEvent) {
+	t.DomainEvent = nil
+	o.pool.Put(t)
+}

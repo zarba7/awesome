@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pbRole;
+
+service application {
+	rpc Dispatch (AppPacket) returns (AppResponse);
+	rpc Query (AppPacket) returns (AppResponse);
+}
+
+
+message AppPacket {
+    int32 tid = 1;
+    bytes content = 2;
+    int64 session = 3;
+}
+
+message AppResponse {
+    int32 code = 1;
+    AppPacket packet = 2;
+}

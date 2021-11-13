@@ -1,0 +1,30 @@
+syntax = "proto3";
+package pbRole;
+
+message Events {
+    int64 tranId = 1; //事务id
+    int64 aggregateRoot = 2;
+    int64 aggregateVersion = 3;//聚合根的版本
+    int64 bornAt = 4;
+    int64 execAt = 5;
+    DomainEvent trans = 6;//事务事件
+    repeated DomainEvent repos = 7;//持久化事件
+    repeated DomainEvent syncs = 8;//同步事件
+}
+
+enum EventOpt {
+    setName = 0;
+    addItem = 1;
+}
+message DomainEvent {
+    EventOpt opt = 1;//事件类型
+    string content = 2;//事件内容
+
+    message setName {
+        string name = 1;
+    }
+    message addItem {
+        int32 tid = 1;
+        int32 delta = 2;
+    }
+}

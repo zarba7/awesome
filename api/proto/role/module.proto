@@ -1,0 +1,25 @@
+syntax = "proto3";
+package pbRole;
+
+enum ModOpt {
+    info = 0;
+    items = 1;
+}
+
+message po {
+    message info {
+        int64 uid = 1;
+        string name = 2;
+        map<int64, entity.item> hash = 3;
+    }
+    message items {
+
+    }
+}
+
+message entity{
+    message item {
+        int64 uid = 1;
+        repeated int32 slot = 2;
+    }
+}
