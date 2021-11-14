@@ -1,13 +1,12 @@
 package info
 
 import (
-	"domain-role/aggregate/modules"
+	"awesome/internal/app/domain_role/role/aggregate/modules"
 )
 
-
 type Entity struct {
-	modules.IRole
-	Name string
+	modules.IFace
+	name string
 }
 
 func (the *Entity) SetName(name string )  {

@@ -1,30 +1,29 @@
 package main
 
 import (
+	"awesome/internal/app/domain_role/role"
+	"awesome/internal/app/domain_role/role/aggregate"
 	"ddd/domain"
 	"ddd/infrastructure"
 	"ddd/infrastructure/persistence"
-	"awesome/internal/app/domain_role/aggregate"
-	"awesome/internal/app/domain_role"
 	"log"
 )
 
-
-func main(){
+func main() {
 	repo, err := persistence.NewRedisRepo("127.0.0.1:6379", "123456", 0)
-	if err != nil{
+	if err != nil {
 		log.Panic(err)
 		return
 	}
 	err = domain.RunService(domain.Options{
 		Repo:           repo,
 		Namespace:      "role",
-		SessionFactory: aggregate.RoleFactory(),
-		EventFactory:   domain_role.EventsFactory(),
-		CommandFactory: domain_role.CommandFactory(),
-		Input: &infrastructure.DaprProxy{},
+		SessionFactory: aggregate.NewRole,
+		EventFactory:   role.Events(),
+		CommandFactory: role.Commands(),
+		Input:          &infrastructure.DaprProxy{},
 	})
-	if err != nil{
+	if err != nil {
 		log.Panic(err)
 	}
 }
